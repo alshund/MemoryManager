@@ -6,38 +6,56 @@
 #include "mmemory.h"
 #include "memory_area.h"
 
-node *head;
+Linked_list *linked_list;
 
 int _malloc(VA* ptr, size_t szBlock) {
-    node* index_node = head;
     int next_node_size;
+    VA next_node_va;
+    int index = 0;
+    Node* index_node = linked_list->head;
+
     while (index_node != NULL) {
-        if (index_node->data->isEmpty == 1) {
-            if (index_node->data->size > szBlock) {
-                next_node_size = index_node->data->size - szBlock;
-                index_node->data->size = szBlock;
-                index_node->data->isEmpty = 0;
-                VA next_node_va = index_node->data->va + index_node->data->size;
-                *ptr = index_node->data->va;
-                node* next_node = create_node(create_memory_block(next_node_va, next_node_size), index_node,index_node->next );
-                index_node->next = next_node;
-                printf("-1-");
-                return 0;
-            } else {
-                printf("-2-");
+        if (index_node->value->isEmpty) {
+            if (index_node->value->size == szBlock) {
+                *ptr = index_node->value->va;
+
+                index_node->value->size = szBlock;
+                index_node->value->isEmpty = false;
+
+                return SUCCESSFUL_IMPLEMENTATION;
+            } else if (index_node->value->size > szBlock) {
+                *ptr = index_node->value->va;
+
+                next_node_size = index_node->value->size - szBlock;
+                next_node_va = index_node->value->va + szBlock;
+
+                index_node->value->size = szBlock;
+                index_node->value->isEmpty = false;
+
+                insert(linked_list, index, create_memory_block(next_node_va, next_node_size));
+
+                return SUCCESSFUL_IMPLEMENTATION;
             }
         }
 
+        if (index_node->next == NULL) {
+            return LACK_OF_MEMORY;
+        }
+
+        index++;
         index_node = index_node->next;
     }
-    return 0;
+    return UNKNOWN_ERROR;
 }
 int _init(int n, int szPage){
     if (n  <  0 || szPage < 0) {
-        return -1;
+        return INVALID_PARAMETERS;
     }
+    linked_list = (Linked_list*)malloc(sizeof(Linked_list));
     int size = n * szPage;
-    node *new_node = init_node(size);
-    head = new_node;
-    return 0;
+    Node *new_node = init_node(size);
+    linked_list->size = 1;
+    linked_list->head = new_node;
+    linked_list->tail = new_node;
+    return SUCCESSFUL_IMPLEMENTATION;
 }
