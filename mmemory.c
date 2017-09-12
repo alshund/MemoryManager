@@ -17,8 +17,8 @@ int _malloc(VA* ptr, size_t szBlock) {
                 next_node_size = index_node->data->size - szBlock;
                 index_node->data->size = szBlock;
                 index_node->data->isEmpty = 0;
-                VA* next_node_va = index_node->data->va + index_node->data->size;
-                ptr = index_node->data->va;
+                VA next_node_va = index_node->data->va + index_node->data->size;
+                *ptr = index_node->data->va;
                 node* next_node = create_node(create_memory_block(next_node_va, next_node_size), index_node,index_node->next );
                 index_node->next = next_node;
                 printf("-1-");

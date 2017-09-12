@@ -15,7 +15,7 @@ memory_block* init_memory_block(size_t size) {
 }
 
 node* init_node(size_t size) {
-    VA* va = (VA*)malloc(size * sizeof(VA));
+    VA va = (VA)malloc(size * sizeof(VA));
     node* new_node = create_node(create_memory_block(va, size), NULL, NULL);
 //    node *new_node = (node*) malloc(sizeof(node));
 //    new_node->data = init_memory_block(size);
@@ -25,7 +25,7 @@ node* init_node(size_t size) {
     return new_node;
 }
 
-memory_block* create_memory_block(VA* va, size_t size) {
+memory_block* create_memory_block(VA va, size_t size) {
     memory_block *new_memory_block = (memory_block*) malloc(sizeof(memory_block));
     new_memory_block->va = va;
     new_memory_block->size = size;
