@@ -39,5 +39,6 @@ Memory_block* create_memory_block(VA va, size_t size);
 Node* create_node(Memory_block* new_memory_block, Node* previous, Node* next);
 void insert(Linked_list *linked_list, size_t index, Memory_block *new_memory_block);
 Node* get_node (Linked_list *linked_list, size_t index);
+void delete_node(Node* node);
 
 #endif //MEMORYMANAGER_MEMORY_AREA_H

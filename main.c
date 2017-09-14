@@ -15,6 +15,10 @@ int main() {
     printf("%d\n", va1);
     printf("%d\n", va2);
     printf("%d\n", va3);
+    _free(va1);
+    printf("%d\n", va1);
+    printf("%d\n", va2);
+    printf("%d\n", va3);
 
     return 0;
 }

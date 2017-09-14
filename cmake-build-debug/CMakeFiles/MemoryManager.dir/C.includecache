@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/ProjectsC/MemoryManager/main.c
+stdio.h
+-
+malloc.h
+-
+mmemory.h
+D:/ProjectsC/MemoryManager/mmemory.h
+
+D:/ProjectsC/MemoryManager/memory_area.c
+malloc.h
+-
+stdio.h
+-
+memory_area.h
+D:/ProjectsC/MemoryManager/memory_area.h
+
+D:/ProjectsC/MemoryManager/memory_area.h
+stdbool.h
+-
+mmemory.h
+D:/ProjectsC/MemoryManager/mmemory.h
+
+D:/ProjectsC/MemoryManager/mmemory.c
+malloc.h
+-
+stdio.h
+-
+mmemory.h
+D:/ProjectsC/MemoryManager/mmemory.h
+memory_area.h
+D:/ProjectsC/MemoryManager/memory_area.h
+
+D:/ProjectsC/MemoryManager/mmemory.h
+stddef.h
+-
+

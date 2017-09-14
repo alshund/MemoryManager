@@ -73,3 +73,9 @@ Node* get_node (Linked_list *linked_list, size_t index) {
 
     return target_node;
 }
+
+void delete_node(Node* node){
+    if(node->previous != NULL) node->previous->next = node->next;
+    if(node->next != NULL) node->next->previous = node ->previous;
+    free(node);
+}
