@@ -11,6 +11,10 @@ stdio.h
 -
 malloc.h
 -
+mem.h
+-
+assert.h
+-
 mmemory.h
 D:/ProjectsC/MemoryManager/mmemory.h
 
@@ -32,6 +36,8 @@ D:/ProjectsC/MemoryManager/mmemory.c
 malloc.h
 -
 stdio.h
+-
+mem.h
 -
 mmemory.h
 D:/ProjectsC/MemoryManager/mmemory.h

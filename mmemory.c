@@ -79,7 +79,7 @@ int _free(VA ptr) {
         }
         index_node = index_node->next;
     }
-    return UNKNOWN_ERROR;
+    return LACK_OF_MEMORY;
 }
 
 int _write(VA ptr, void* pBuffer, size_t szBuffer) {
