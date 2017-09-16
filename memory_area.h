@@ -29,7 +29,6 @@ typedef struct Node {
 typedef struct Linked_list {
     size_t size;
     Node *head;
-    Node *tail;
 } Linked_list;
 
 

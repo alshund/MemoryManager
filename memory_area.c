@@ -56,10 +56,9 @@ void insert (Linked_list *linked_list, size_t index, Memory_block *new_memory_bl
     if (!elm->previous) {
         linked_list->head = elm;
     }
-    if (!elm->next) {
-        linked_list->tail = elm;
-    }
-    linked_list->size++;
+//    if (!elm->next) {
+//        linked_list->tail = elm;
+//    }
 }
 
 Node* get_node (Linked_list *linked_list, size_t index) {
