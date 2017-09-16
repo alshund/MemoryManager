@@ -105,13 +105,13 @@ int _read(VA ptr, void* pBuffer, size_t szBuffer) {
     Node *index_node = linked_list->head;
     while (index_node != NULL) {
         if (!index_node->value->isEmpty) {
-            if (index_node->value->va <= ptr && index_node->value->va + index_node->value->size > ptr) {
-                if (index_node->value->va + index_node->value->size - ptr < szBuffer) { return LACK_OF_MEMORY; }
+            if (index_node->value->va <= ptr && index_node->value->va + linked_list->size> ptr) {
+                if (index_node->value->va + linked_list->size - ptr < szBuffer) { return LACK_OF_MEMORY; }
                 memcpy(pBuffer, ptr, szBuffer);
                 return SUCCESSFUL_IMPLEMENTATION;
             }
         }
         index_node = index_node->next;
     }
-    return UNKNOWN_ERROR;
+    return LACK_OF_MEMORY;
 }

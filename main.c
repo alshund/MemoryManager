@@ -7,7 +7,7 @@
 #include <assert.h>
 #include "mmemory.h"
 
-void malloc_test() {
+void malloc_free_test() {
     VA va1;
     VA va2;
     VA va3;
@@ -26,23 +26,24 @@ void malloc_test() {
     assert(0 == err);
     err = _free(va4);
     assert(-2 == err);
+    printf("malloc free test passed \n");
 }
 
 int main() {
-    VA va1;
-    VA va2;
-    VA va3;
-
     _init(1, 15);
-    _malloc(&va1, 11);
-    _malloc(&va2, 1);
-    _malloc(&va3, 9);
-    char *buffer = "qwerty";
-    VA allocated_buffer = (char *) malloc(sizeof(char) * 6);
-    _free(va1);
-    printf("%d\n", _write(va1, buffer, 10));
-    printf("%d\n", _read(va1+3, allocated_buffer, 9));
-    malloc_test();
+//    VA va1;
+//    VA va2;
+//    VA va3;
+
+//    _malloc(&va1, 11);
+//    _malloc(&va2, 1);
+//    _malloc(&va3, 9);
+//    char *buffer = "qwerty";
+//    VA allocated_buffer = (char *) malloc(sizeof(char) * 6);
+//    _free(va1);
+//    printf("%d\n", _write(va1, buffer, 10));
+//    printf("%d\n", _read(va1+3, allocated_buffer, 9));
+    malloc_free_test();
 
     return 0;
 }
