@@ -3,16 +3,13 @@
 //
 #include <stdio.h>
 #include <malloc.h>
-#include <mem.h>
 #include <assert.h>
 #include "mmemory.h"
 
-void malloc_free_test() {
+void malloc_test() {
     VA va1;
     VA va2;
     VA va3;
-    VA va4 = malloc(5);
-
     int err = _malloc(&va1, 11);
     assert(0 == err);
     err = _malloc(&va2, 1);
@@ -20,30 +17,48 @@ void malloc_free_test() {
     err = _malloc(&va3, 9);
     assert(-2 == err);
 
-    err = _free(va1);
+    _free(va1);
+    _free(va2);
+    _free(va3);
+    printf("malloc test passed \n");
+}
+
+void free_test(){
+    VA va1;
+    VA va2;
+    VA va3 = malloc(5);
+
+    _malloc(&va1, 11);
+    _malloc(&va2, 1);
+
+    int err = _free(va1);
     assert(0 == err);
     err = _free(va2);
     assert(0 == err);
-    err = _free(va4);
+    err = _free(va3);
     assert(-2 == err);
-    printf("malloc free test passed \n");
+    printf("free test passed \n");
+}
+
+void write_test(){
+    VA va1;
+    VA va2;
+
+    _malloc(&va1, 2);
+    _malloc(&va2, 12);
+    printf("va1 %d \n",va1);
+    printf("va2 %d \n",va2);
+    char *buffer = "qwerty";
+   // VA allocated_buffer = (char *) malloc(sizeof(char) * 6);
+    int err = _write(va2, buffer, 9);
+   // assert(-2 == err);
+    printf("%d",err);
 }
 
 int main() {
     _init(1, 15);
-//    VA va1;
-//    VA va2;
-//    VA va3;
-
-//    _malloc(&va1, 11);
-//    _malloc(&va2, 1);
-//    _malloc(&va3, 9);
-//    char *buffer = "qwerty";
-//    VA allocated_buffer = (char *) malloc(sizeof(char) * 6);
-//    _free(va1);
-//    printf("%d\n", _write(va1, buffer, 10));
-//    printf("%d\n", _read(va1+3, allocated_buffer, 9));
-    malloc_free_test();
-
+    malloc_test();
+    free_test();
+    write_test();
     return 0;
 }
