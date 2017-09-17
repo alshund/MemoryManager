@@ -42,7 +42,7 @@ Node* create_node(Memory_block* new_memory_block, Node* previous, Node* next) {
 }
 
 void insert (Linked_list *linked_list, size_t index, Memory_block *new_memory_block) {
-    Node *elm = get_node(linked_list, index);
+    Node *elm = get_node_by_index(linked_list, index);
     Node *ins = (Node*)malloc(sizeof(Node));
     ins->value = new_memory_block;
     ins->previous = elm;
@@ -56,12 +56,27 @@ void insert (Linked_list *linked_list, size_t index, Memory_block *new_memory_bl
     if (!elm->previous) {
         linked_list->head = elm;
     }
-//    if (!elm->next) {
-//        linked_list->tail = elm;
-//    }
+    if (!elm->next) {
+        linked_list->tail = elm;
+    }
 }
 
-Node* get_node (Linked_list *linked_list, size_t index) {
+Node* get_node_by_va (Linked_list *linked_list, VA va) {
+    Node *target_node = linked_list->head;
+    while (target_node != NULL) {
+//        printf("va %d\n", target_node->value->va);
+//        printf("size %d\n", target_node->value->size);
+//        printf("ptr %d\n", va);
+        if (target_node->value->va <= va && target_node->value->va + target_node->value->size > va && target_node->value->isEmpty == false) {
+            return target_node;
+        }
+        target_node = target_node->next;
+    }
+
+    return NULL;
+}
+
+Node* get_node_by_index(Linked_list *linked_list, size_t index) {
     Node *target_node = linked_list->head;
     size_t i = 0;
 
@@ -73,8 +88,21 @@ Node* get_node (Linked_list *linked_list, size_t index) {
     return target_node;
 }
 
-void delete_node(Node* node){
-    if(node->previous != NULL) node->previous->next = node->next;
-    if(node->next != NULL) node->next->previous = node ->previous;
-    free(node);
+void delete_node(Linked_list* linked_list, size_t index){
+    Node *elm = NULL;
+    elm = get_node_by_index(linked_list, index);
+    if (elm->previous) {
+        elm->previous->next = elm->next;
+    }
+    if (elm->next) {
+        elm->next->previous = elm->previous;
+    }
+    if (!elm->previous) {
+        linked_list->head = elm->next;
+    }
+    if (!elm->next) {
+        linked_list->tail = elm->previous;
+    }
+
+    free(elm);
 }
