@@ -85,21 +85,27 @@ int _free(VA ptr) { //!!!!!
                 index_node->previous->value->size += index_node->next->value->size;
                 delete_node(linked_list, index_node->next);
                 delete_node(linked_list, index_node);
+                free(ptr);
+                return SUCCESSFUL_IMPLEMENTATION;
             } else if (index_node->previous != NULL && index_node->previous->value->isEmpty) {
                // printf("previous\n");
                 index_node->previous->value->size += index_node->value->size;
                 delete_node(linked_list, index_node);
+                free(ptr);
+                return SUCCESSFUL_IMPLEMENTATION;
             } else if (index_node->next != NULL && index_node->next->value->isEmpty) {
                // printf("next\n");
                 index_node->value->size += index_node->next->value->size;
                 index_node->value->isEmpty = 1;
                 delete_node(linked_list, index_node->next);
+                free(ptr);
+                return SUCCESSFUL_IMPLEMENTATION;
             } else {
-              //  printf("nothing\n");
                 index_node->value->isEmpty = 1;
+                free(ptr);
+                return SUCCESSFUL_IMPLEMENTATION;
             }
-            free(ptr);
-            return SUCCESSFUL_IMPLEMENTATION;
+
         }
         index_node = index_node->next;
     }
@@ -122,23 +128,6 @@ int _write(VA ptr, void *pBuffer, size_t szBuffer) {
         return LACK_OF_MEMORY;
     } else return LACK_OF_MEMORY;
     return UNKNOWN_ERROR;
-//    if (linked_list->head->value->va <= ptr && ptr + szBuffer <= linked_list->head->value->va + linked_list->size) {
-//        Node *first_index_node = linked_list->head;
-//        while(first_index_node != NULL) {
-//            int size = 0;
-//            Node *second_index_node = first_index_node;
-//            while (!second_index_node->value->isEmpty) {
-//                size += second_index_node->value->size;
-//                if (first_index_node->value->va + size >= ptr + szBuffer) {
-//                    memcpy(ptr, pBuffer, szBuffer);
-//                    return SUCCESSFUL_IMPLEMENTATION;
-//                }
-//                second_index_node = second_index_node->next;
-//            }
-//            first_index_node = first_index_node->next;
-//        }
-//    }
-//    return LACK_OF_MEMORY;
 }
 
 int _read(VA ptr, void *pBuffer, size_t szBuffer) {
