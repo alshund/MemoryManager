@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/shund/CLionProjects/MemoryManager/main.c" "C:/Users/shund/CLionProjects/MemoryManager/cmake-build-debug/CMakeFiles/MemoryManager.dir/main.c.obj"
-  "C:/Users/shund/CLionProjects/MemoryManager/memory_area.c" "C:/Users/shund/CLionProjects/MemoryManager/cmake-build-debug/CMakeFiles/MemoryManager.dir/memory_area.c.obj"
-  "C:/Users/shund/CLionProjects/MemoryManager/mmemory.c" "C:/Users/shund/CLionProjects/MemoryManager/cmake-build-debug/CMakeFiles/MemoryManager.dir/mmemory.c.obj"
+  "D:/ProjectsC/LabaOS/MemoryManager/main.c" "D:/ProjectsC/LabaOS/MemoryManager/cmake-build-debug/CMakeFiles/MemoryManager.dir/main.c.obj"
+  "D:/ProjectsC/LabaOS/MemoryManager/memory_area.c" "D:/ProjectsC/LabaOS/MemoryManager/cmake-build-debug/CMakeFiles/MemoryManager.dir/memory_area.c.obj"
+  "D:/ProjectsC/LabaOS/MemoryManager/mmemory.c" "D:/ProjectsC/LabaOS/MemoryManager/cmake-build-debug/CMakeFiles/MemoryManager.dir/mmemory.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

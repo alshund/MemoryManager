@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/shund/CLionProjects/MemoryManager
+# Install script for directory: D:/ProjectsC/LabaOS/MemoryManager
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/shund/CLionProjects/MemoryManager/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/ProjectsC/LabaOS/MemoryManager/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

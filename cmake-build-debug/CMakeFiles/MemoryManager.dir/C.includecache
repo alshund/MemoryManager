@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,45 +6,45 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/shund/CLionProjects/MemoryManager/main.c
+D:/ProjectsC/LabaOS/MemoryManager/main.c
 stdio.h
 -
 malloc.h
+-
+assert.h
+-
+mmemory.h
+D:/ProjectsC/LabaOS/MemoryManager/mmemory.h
+
+D:/ProjectsC/LabaOS/MemoryManager/memory_area.c
+malloc.h
+-
+stdio.h
+-
+memory_area.h
+D:/ProjectsC/LabaOS/MemoryManager/memory_area.h
+
+D:/ProjectsC/LabaOS/MemoryManager/memory_area.h
+stdbool.h
+-
+mmemory.h
+D:/ProjectsC/LabaOS/MemoryManager/mmemory.h
+
+D:/ProjectsC/LabaOS/MemoryManager/mmemory.c
+malloc.h
+-
+stdio.h
 -
 mem.h
 -
 assert.h
 -
 mmemory.h
-C:/Users/shund/CLionProjects/MemoryManager/mmemory.h
-
-C:/Users/shund/CLionProjects/MemoryManager/memory_area.c
-malloc.h
--
-stdio.h
--
+D:/ProjectsC/LabaOS/MemoryManager/mmemory.h
 memory_area.h
-C:/Users/shund/CLionProjects/MemoryManager/memory_area.h
+D:/ProjectsC/LabaOS/MemoryManager/memory_area.h
 
-C:/Users/shund/CLionProjects/MemoryManager/memory_area.h
-stdbool.h
--
-mmemory.h
-C:/Users/shund/CLionProjects/MemoryManager/mmemory.h
-
-C:/Users/shund/CLionProjects/MemoryManager/mmemory.c
-malloc.h
--
-stdio.h
--
-mem.h
--
-mmemory.h
-C:/Users/shund/CLionProjects/MemoryManager/mmemory.h
-memory_area.h
-C:/Users/shund/CLionProjects/MemoryManager/memory_area.h
-
-C:/Users/shund/CLionProjects/MemoryManager/mmemory.h
+D:/ProjectsC/LabaOS/MemoryManager/mmemory.h
 stddef.h
 -
 
