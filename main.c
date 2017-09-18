@@ -8,8 +8,11 @@
 
 void init_test() {
     int err;
-    VA va1;
-    VA va2;
+    err = _init(-1, -15);
+    assert(-1 == err);
+
+    err = _init(1, 25);
+    assert(0 == err);
 }
 
 void malloc_test() {
@@ -201,5 +204,6 @@ int main() {
     free_test();
     write_test();
     read_test();
+    init_test();
     return 0;
 }
