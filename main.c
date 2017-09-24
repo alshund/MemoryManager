@@ -163,11 +163,11 @@ void read_successful_implementation() {
     int err;
     VA va1;
     char* write_buffer = "write";
-    char *read_buffer = (char *) malloc(3);
+    char *read_buffer = (char *) malloc(5);
     _init(1, 10);
-    _malloc(&va1, 5);
-    _write(va1 + 2, write_buffer, 2);
-    err = _read(va1 + 2, read_buffer, 3);
+    _malloc(&va1, 10);
+    _write(va1 + 5, write_buffer, 5);
+    err = _read(va1 + 5, read_buffer, 5);
     assert(0 == err);
 }
 
