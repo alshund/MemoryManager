@@ -28,7 +28,6 @@ Node *create_node(Memory_block *new_memory_block, Node *previous, Node *next) {
 }
 
 void insert(Linked_list *linked_list, Node *previousNode, Node *nextNode, Memory_block *new_memory_block) {
-    //  Node *elm = get_node_by_index(linked_list, index);
     Node *ins = (Node *) malloc(sizeof(Node));
     ins->value = new_memory_block;
     ins->previous = previousNode;
@@ -59,18 +58,6 @@ Node *get_node(Linked_list *linked_list, VA va) {
 
     return NULL;
 }
-
-//Node* get_node_by_index(Linked_list *linked_list, size_t index) {
-//    Node *target_node = linked_list->head;
-//    size_t i = 0;
-//
-//    while (target_node && i < index) {
-//        target_node = target_node->next;
-//        i++;
-//    }
-//
-//    return target_node;
-//}
 
 void delete_node(Linked_list *linked_list, Node *elm) {
     if (elm->previous) {
