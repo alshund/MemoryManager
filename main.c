@@ -6,197 +6,205 @@
 #include <assert.h>
 #include "mmemory.h"
 
-void init_test() {
+void init_invalid_parameters() {
+    int err;
+    err = _init(-1, -15);
+    assert(-1 == err);
+}
+
+void init_successful_implementation() {
+    int err;
+    err = _init(1, 25);
+    assert(0 == err);
+}
+
+void malloc_invalid_parameters() {
+    int err;
+    _init(1, 10);
+    err = _malloc(NULL, 10);
+    assert(-1 == err);
+}
+
+void malloc_lack_of_memory() {
     int err;
     VA va1;
     VA va2;
+    _init(1, 10);
+    _malloc(&va1, 10);
+    err = _malloc(&va2, 1);
+    assert(-2 == err);
+}
+
+void malloc_with_memory_remaining() {
+    int err;
+    VA va1;
+    _init(1, 10);
+    err = _malloc(&va1, 10);
+    assert(0 == err);
+}
+
+void malloc_without_memory_remaining() {
+    int err;
+    VA va1;
+    _init(1, 10);
+    err = _malloc(&va1, 5);
+    assert(0 == err);
+}
+
+void free_invalid_parameters() {
+    int err;
+    VA va1;
+    _init(1, 10);
+    err = _free(va1);
+    assert(-1 == err);
+}
+
+void free_centre_success() {
+    int err;
+    VA va1;
+    VA va2;
+    VA va3;
+    _init(1, 15);
+    _malloc(&va1, 5);
+    _malloc(&va2, 5);
+    _malloc(&va3, 5);
+    _free(va1);
+    _free(va3);
+    err = _free(va2);
+    assert(0 == err);
+}
+
+void free_right_success() {
+    int err;
+    VA va1;
+    VA va2;
+    _init(1, 10);
+    _malloc(&va1, 5);
+    _malloc(&va2, 5);
+    _free(va1);
+    err = _free(va2);
+    assert(0 == err);
+}
+
+void free_left_success() {
+    int err;
+    VA va1;
+    VA va2;
+    _init(1, 10);
+    _malloc(&va1, 5);
+    _malloc(&va2, 5);
+    _free(va2);
+    err = _free(va1);
+    assert(0 == err);
+}
+
+void free_one_block_success() {
+    int err;
+    VA va1;
+    _init(1, 10);
+    _malloc(&va1, 10);
+    err = _free(va1);
+    assert(0 == err);
+}
+
+void write_invalid_parameters() {
+    int err;
+    VA va1;
+    _init(1, 10);
+    _malloc(&va1, 10);
+    err = _write(NULL, NULL, 10);
+    assert(-1 == err);
+}
+
+void write_lack_of_memory() {
+    int err;
+    VA va1;
+    char* write_buffer = "write";
+    _init(1, 10);
+    _malloc(&va1, 5);
+    err = _write(va1, write_buffer, 6);
+    assert(-2 == err);
+}
+
+void write_successful_implementation() {
+    int err;
+    VA va1;
+    char* write_buffer = "write";
+    _init(1, 10);
+    _malloc(&va1, 5);
+    err = _write(va1 + 2, write_buffer, 3);
+    assert(0 == err);
+}
+
+void read_invalid_parameters() {
+    int err;
+    VA va1;
+    char* write_buffer = "write";
+    _init(1, 10);
+    _malloc(&va1, 5);
+    _write(va1, write_buffer, 5);
+    err = _read(NULL, NULL, 5);
+    assert(-1 == err);
+}
+
+void read_lack_of_memory() {
+    int err;
+    VA va1;
+    char* write_buffer = "write";
+    char *read_buffer = (char *) malloc(3);
+    _init(1, 10);
+    _malloc(&va1, 5);
+    _write(va1 + 2, write_buffer, 2);
+    err = _read(va1 + 2, read_buffer, 5);
+    assert(-2 == err);
+}
+
+void read_successful_implementation() {
+    int err;
+    VA va1;
+    char* write_buffer = "write";
+    char *read_buffer = (char *) malloc(5);
+    _init(1, 10);
+    _malloc(&va1, 10);
+    _write(va1 + 5, write_buffer, 5);
+    err = _read(va1 + 5, read_buffer, 5);
+    assert(0 == err);
+}
+
+void init_test() {
+    init_invalid_parameters();
+    init_successful_implementation();
 }
 
 void malloc_test() {
-    int err;
-    VA va1;
-    VA va2;
-    VA va3;
-    VA va4;
-
-    err = _malloc(&va1, 11);
-    assert(1 == err);
-
-    _init(1, 25);
-
-    err = _malloc(&va1, 10);
-    assert(0 == err);
-    err = _malloc(&va1, 5);
-    assert(-1 == err);
-
-    err = _malloc(NULL, -1);
-    assert(-1 == err);
-
-    err = _malloc(&va2, 5);
-    assert(0 == err);
-
-    err = _malloc(&va3, 10);
-    assert(0 == err);
-
-    _free(va2);
-    va2 = NULL;
-    err = _malloc(&va2, 4);
-    assert(0 == err);
-
-    err = _malloc(&va4, 2);
-    assert(-2 == err);
-
-    err = _malloc(&va4, 1);
-    assert(0 == err);
-
-    _free(va1);
-    va1 = NULL;
-
-    _free(va3);
-    va3 = NULL;
-
-    _free(va4);
-    va4 = NULL;
-
-    free(va2);
-    va2 = NULL;
-
-    printf("malloc test passed \n");
+    malloc_invalid_parameters();
+    malloc_lack_of_memory();
+    malloc_with_memory_remaining();
+    malloc_without_memory_remaining();
 }
 
-void free_test(){
-    int err;
-    VA va1;
-    VA va2;
-    VA va3;
-    VA va4;
-    VA va5;
-
-    err = _free(va1);
-    assert(-1 == err);
-
-    _init(1, 25);
-
-    err = _free(va1);
-    assert(-1 == err);
-
-    _malloc(&va1, 10);
-    _malloc(&va2, 5);
-    _malloc(&va3, 5);
-    _malloc(&va4, 5);
-
-    err = _free(va3);
-    assert(0 == err);
-    va3 = NULL;
-
-    _malloc(&va3,4);
-    _malloc(&va5,1);
-
-    err = _free(va1);
-    assert(0 == err);
-    va1 = NULL;
-
-    err = _free(va2);
-    assert(0 == err);
-    va2 = NULL;
-
-    err = _free(va4);
-    assert(0 == err);
-    va4 = NULL;
-
-    err = _free(va5);
-    assert(0 == err);
-    va5 = NULL;
-
-    err = _free(va3);
-    assert(0 == err);
-    va3 = NULL;
-
-    err = _free(va3);
-    assert(-1 == err);
-
-    printf("free test passed \n");
+void free_test() {
+    free_invalid_parameters();
+    free_centre_success();
+    free_right_success();
+    free_left_success();
+    free_one_block_success();
 }
 
-void write_test(){
-    int err;
-    VA va1;
-    VA va2;
-    VA va3;
-    char *buffer = "write";
-
-    err = _write(va1, buffer, 5);
-    assert(-1 == err);
-
-    err = _write(va1, buffer, -1);
-    assert(-1 == err);
-
-    _init(1, 25);
-
-    _malloc(&va1, 5);
-
-    err = _write(va1, buffer, 5);
-    assert(0 == err);
-
-    _malloc(&va2, 5);
-    _malloc(&va3, 10);
-
-    _free(va2);
-    va2 = NULL;
-
-    err = _write(va2, buffer, 5);
-    assert(-1 == err);
-
-    err = _write(va1, buffer, 10);
-    assert(-2 == err);
-
-    err = _write(va1 + 2, buffer, 3);
-    assert(0 == err);
-
-    err = _write(va3, buffer, 10);
-    assert(0 == err);
-
-    _free(va1);
-    va1 = NULL;
-
-    _free(va3);
-    va3 = NULL;
-
-    printf("write test passed\n");
+void write_test() {
+    write_invalid_parameters();
+    write_lack_of_memory();
+    write_successful_implementation();
 }
 
 void read_test() {
-    int err;
-    VA va1;
-    VA va2;
-    VA va3;
-    char *read_buffer = (char *)malloc(6);
-    char *write_buffer = "write";
-
-    err = _read(va1, read_buffer, 5);
-    assert(-1 == err);
-
-    err = _read(va1, read_buffer, -1);
-    assert(-1 == err);
-
-    _init(1, 25);
-
-    _malloc(&va1, 5);
-
-    _write(va1, write_buffer, 5);
-    err = _read(va1, read_buffer, 5);
-    assert(0 == err);
-
-    _malloc(&va2, 5);
-    _malloc(&va3, 10);
-
-    _write(va2, write_buffer, 2);
-    err = _read(va2 + 3, write_buffer, 2);
-    assert(-2 == err);
-    printf("write test password");
+    read_invalid_parameters();
+    read_lack_of_memory();
+    read_successful_implementation();
 }
 
 int main() {
+    init_test();
     malloc_test();
     free_test();
     write_test();

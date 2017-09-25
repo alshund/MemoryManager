@@ -12,8 +12,6 @@
 #define SUCCESSFUL_IMPLEMENTATION 0;
 #define UNKNOWN_ERROR 1;
 
-
-
 typedef struct Memory_block {
     VA va;
     size_t size;
@@ -29,16 +27,13 @@ typedef struct Node {
 typedef struct Linked_list {
     size_t size;
     Node *head;
-  //  Node *tail;
 } Linked_list;
 
 
-Memory_block* init_memory_block(size_t size);
 Node* init_node(size_t size);
 Memory_block* create_memory_block(VA va, size_t size);
 Node* create_node(Memory_block* new_memory_block, Node* previous, Node* next);
 void insert(Linked_list *linked_list, Node *previousNode,Node *nextNode, Memory_block *new_memory_block);
-//Node* get_node_by_index(Linked_list *linked_list, size_t index);
 Node* get_node(Linked_list *linked_list, VA va);
 void delete_node(Linked_list* linked_list, Node* elem);
 
