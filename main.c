@@ -209,5 +209,6 @@ int main() {
     free_test();
     write_test();
     read_test();
+    get_stat();
     return 0;
 }

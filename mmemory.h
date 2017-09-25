@@ -102,4 +102,6 @@ int _write (VA ptr, void* pBuffer, size_t szBuffer);
  **/
 int _init (int n, int szPage);
 
+void get_stat();
+
 #endif //MEMORYMANAGER_MMEMORY_H

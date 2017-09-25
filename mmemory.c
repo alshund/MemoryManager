@@ -4,10 +4,39 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <mem.h>
+#include <stdlib.h>
 #include "mmemory.h"
 #include "memory_area.h"
 
 Linked_list *linked_list;
+
+void get_stat() {
+    FILE *file;
+    int s = 0;
+    int S = 0;
+    int N = 0;
+    Node *index_node = linked_list->head;
+
+    while (index_node != NULL) {
+        if (index_node->value->isEmpty) {
+            N++;
+            S += index_node->value->size;
+            if (index_node->value->size > s) s = index_node->value->size;
+        }
+        index_node = index_node->next;
+    }
+    if ((file = fopen("log.txt", "a")) == NULL) {
+        printf("error");
+    } else {
+
+        double *result = 0;
+        if(S !=0) result = s / S;
+        fprintf(file,"%d  %d \n",result,N);
+        fclose(file);
+    }
+
+
+}
 
 int _malloc(VA *ptr, size_t szBlock) {
     if (linked_list == NULL) return UNKNOWN_ERROR;
@@ -15,7 +44,7 @@ int _malloc(VA *ptr, size_t szBlock) {
 
     int new_node_size;
     VA new_node_va;
-    int index = 0;
+//    int index = 0;
     Node *index_node = linked_list->head;
     while (index_node != NULL) {
         if (index_node->value->isEmpty) {
@@ -33,7 +62,7 @@ int _malloc(VA *ptr, size_t szBlock) {
                 index_node->value->size -= szBlock;
 
                 Memory_block *block = create_memory_block(new_node_va, new_node_size);
-                block -> isEmpty = false;
+                block->isEmpty = false;
 
                 insert(linked_list, index_node->previous, index_node, block);
 
@@ -41,7 +70,7 @@ int _malloc(VA *ptr, size_t szBlock) {
             }
         }
         if (index_node->next == NULL) return LACK_OF_MEMORY;
-        index++;
+//        index++;
         index_node = index_node->next;
     }
     return UNKNOWN_ERROR;
